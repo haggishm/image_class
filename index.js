@@ -18,7 +18,6 @@ async function app() {
     // Get the intermediate activation of MobileNet 'conv_preds' and pass that
     // to the KNN classifier.
     const activation = net.infer(webcamElement, 'conv_preds');
-
     // Pass the intermediate activation to the classifier.
     classifier.addExample(activation, classId);
   };
@@ -27,22 +26,25 @@ async function app() {
   document.getElementById('class-a').addEventListener('click', () => addExample(0));
   document.getElementById('class-b').addEventListener('click', () => addExample(1));
   document.getElementById('class-c').addEventListener('click', () => addExample(2));
+  document.getElementById('class-na').addEventListener('click', () => addExample(3));
+ 
 
   while (true) {
     if (classifier.getNumClasses() > 0) {
       // Get the activation from mobilenet from the webcam.
       const activation = net.infer(webcamElement, 'conv_preds');
       // Get the most likely class and confidences from the classifier module.
-      const result = await classifier.predictClass(activation);
-      const classes = ['A', 'B', 'C'];
+      const result = await classifier.predictClass(activation, 4);
+      const classes = ['A', 'B', 'C', 'No_Action'];
       document.getElementById('console').innerText = `
-        prediction: ${classes[result.classIndex]}\n
-        probability: ${result.confidences[result.classIndex]}
+        prediction: ${classes[parseInt(result.label)]}\n
+        probability: ${result.confidences[parseInt(result.label)]}
       `;
-     }
-
+    }
     await tf.nextFrame();
+
   }
+  
 }
 
 async function setupWebcam() {
