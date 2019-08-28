@@ -4,14 +4,19 @@
     <script src="https://unpkg.com/@tensorflow/tfjs"></script>
     <script src="https://unpkg.com/@tensorflow-models/mobilenet@2.0.2"></script>
     <script src="https://unpkg.com/@tensorflow-models/knn-classifier"></script>
+    <title>Image Classification</title>
+    <link href = "style.css" rel = "stylesheet" />
+
   </head>  
   <body>
     <div id="console"></div>
+    <h1>Image Classification</h1>
     <!-- Add an image that we will use to test -->
-    <video autoplay playsinline muted id="webcam" width="224" height="224"></video>
+    <video autoplay playsinline muted id="webcam" width="284" height="284"></video>
     <button id="class-a">Add A</button>
     <button id="class-b">Add B</button>
     <button id="class-c">Add C</button>
+    <button id="class-na">NoAction</button>
     <!-- Load index.js after the content of the page -->
     <script src="index.js"></script>
   </body>
