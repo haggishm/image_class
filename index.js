@@ -1,5 +1,6 @@
 const webcamElement = document.getElementById('webcam');
 const classifier = knnClassifier.create();
+//<link href = "style.css" rel = "stylesheet" />
 
 let net;
 
@@ -34,8 +35,9 @@ async function app() {
       // Get the activation from mobilenet from the webcam.
       const activation = net.infer(webcamElement, 'conv_preds');
       // Get the most likely class and confidences from the classifier module.
-      const result = await classifier.predictClass(activation, 4);
+      const result = await classifier.predictClass(activation, 10);
       const classes = ['A', 'B', 'C', 'No_Action'];
+      document.getElementById("console").innerText.textAlign = "center"; 
       document.getElementById('console').innerText = `
         prediction: ${classes[parseInt(result.label)]}\n
         probability: ${result.confidences[parseInt(result.label)]}
